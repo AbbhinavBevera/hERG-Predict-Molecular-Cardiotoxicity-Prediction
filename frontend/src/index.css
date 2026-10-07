@@ -1,0 +1,241 @@
+@import "tailwindcss";
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  color: #e6edf3;
+  background-color: #0b0f15;
+  line-height: 1.5;
+  overflow-x: hidden;
+}
+
+/* =========================================================================
+   Liquid Glass Animations & Fluid Lighting
+   ========================================================================= */
+
+@keyframes liquidBlob1 {
+  0% {
+    transform: translate(0px, 0px) scale(1) rotate(0deg);
+  }
+  33% {
+    transform: translate(110px, 70px) scale(1.18) rotate(45deg);
+  }
+  66% {
+    transform: translate(-70px, 120px) scale(0.92) rotate(90deg);
+  }
+  100% {
+    transform: translate(0px, 0px) scale(1) rotate(0deg);
+  }
+}
+
+@keyframes liquidBlob2 {
+  0% {
+    transform: translate(0px, 0px) scale(1) rotate(0deg);
+  }
+  33% {
+    transform: translate(-120px, -60px) scale(1.22) rotate(-40deg);
+  }
+  66% {
+    transform: translate(60px, -110px) scale(0.85) rotate(-80deg);
+  }
+  100% {
+    transform: translate(0px, 0px) scale(1) rotate(0deg);
+  }
+}
+
+@keyframes liquidBlob3 {
+  0% {
+    transform: translate(0px, 0px) scale(1) rotate(0deg);
+  }
+  33% {
+    transform: translate(90px, -80px) scale(1.15) rotate(35deg);
+  }
+  66% {
+    transform: translate(-100px, 50px) scale(0.9) rotate(-50deg);
+  }
+  100% {
+    transform: translate(0px, 0px) scale(1) rotate(0deg);
+  }
+}
+
+/* Fluid Liquid Flow for Progress Gauges & Highlights */
+@keyframes liquidFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Gentle Liquid Sheen reflection sweep across glass surfaces */
+@keyframes liquidSheen {
+  0% {
+    transform: translateX(-150%) skewX(-20deg);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.12;
+  }
+  30% {
+    transform: translateX(250%) skewX(-20deg);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(250%) skewX(-20deg);
+    opacity: 0;
+  }
+}
+
+/* Subtle, tasteful micro-fade animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Ambient Liquid Blobs */
+.liquid-blob-1 {
+  animation: liquidBlob1 18s ease-in-out infinite;
+}
+
+.liquid-blob-2 {
+  animation: liquidBlob2 22s ease-in-out infinite;
+}
+
+.liquid-blob-3 {
+  animation: liquidBlob3 25s ease-in-out infinite;
+}
+
+/* Liquid Glass Surfaces */
+.liquid-glass {
+  background: rgba(22, 27, 34, 0.68);
+  backdrop-filter: blur(16px) saturate(170%);
+  -webkit-backdrop-filter: blur(16px) saturate(170%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 
+    0 10px 30px -5px rgba(0, 0, 0, 0.45),
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+.liquid-glass-card {
+  position: relative;
+  overflow: hidden;
+  background: rgba(22, 27, 34, 0.68);
+  backdrop-filter: blur(16px) saturate(170%);
+  -webkit-backdrop-filter: blur(16px) saturate(170%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 
+    0 10px 30px -5px rgba(0, 0, 0, 0.45),
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+.liquid-glass-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.03) 40%,
+    rgba(255, 255, 255, 0.09) 50%,
+    rgba(255, 255, 255, 0.03) 60%,
+    transparent 100%
+  );
+  transform: translateX(-150%);
+  animation: liquidSheen 9s infinite cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+/* Liquid Glass Interactive Pills */
+.liquid-glass-pill {
+  background: rgba(22, 27, 34, 0.55);
+  backdrop-filter: blur(12px) saturate(150%);
+  -webkit-backdrop-filter: blur(12px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.liquid-glass-pill:hover {
+  background: rgba(33, 38, 45, 0.75);
+  border-color: rgba(88, 166, 255, 0.4);
+  box-shadow: 
+    0 4px 18px -2px rgba(88, 166, 255, 0.2),
+    inset 0 1px 1px rgba(255, 255, 255, 0.2);
+  transform: translateY(-1.5px);
+}
+
+.liquid-glass-pill.selected {
+  background: rgba(33, 38, 45, 0.85);
+  border-color: #58a6ff;
+  box-shadow: 
+    0 0 16px rgba(88, 166, 255, 0.25),
+    inset 0 1px 1px rgba(255, 255, 255, 0.25);
+}
+
+/* Liquid Fluid Flow Bars */
+.liquid-flow-red {
+  background: linear-gradient(90deg, #da3633, #f85149, #ff7b72, #da3633);
+  background-size: 200% 200%;
+  animation: liquidFlow 4s ease infinite;
+}
+
+.liquid-flow-green {
+  background: linear-gradient(90deg, #238636, #2ea043, #3fb950, #238636);
+  background-size: 200% 200%;
+  animation: liquidFlow 4s ease infinite;
+}
+
+/* Utilitarian table styling in dark mode */
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 8px 12px;
+}
+
+th {
+  background-color: rgba(22, 27, 34, 0.75);
+  text-align: left;
+  font-weight: 600;
+  color: #e6edf3;
+}
+
+tr:hover td {
+  background-color: rgba(33, 38, 45, 0.6);
+}
+
+/* Molecule SVG container */
+.molecule-svg-container {
+  overflow: hidden;
+}
+
+.molecule-svg-container svg {
+  width: 100% !important;
+  max-width: 440px !important;
+  height: auto !important;
+  max-height: 250px !important;
+  display: block !important;
+  margin: 0 auto !important;
+  overflow: visible !important;
+}

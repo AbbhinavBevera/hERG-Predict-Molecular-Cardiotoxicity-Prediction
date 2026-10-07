@@ -1,0 +1,16 @@
+{
+  "model_type": "RandomForestClassifier",
+  "n_estimators": 300,
+  "max_depth": 30,
+  "fingerprint": {
+    "type": "Morgan / ECFP4",
+    "radius": 2,
+    "n_bits": 1024,
+    "use_chirality": false
+  },
+  "training_samples": 10472,
+  "validation_samples": 1309,
+  "internal_test_samples": 1309,
+  "external_test_samples": 182,
+  "random_state": 42
+}
