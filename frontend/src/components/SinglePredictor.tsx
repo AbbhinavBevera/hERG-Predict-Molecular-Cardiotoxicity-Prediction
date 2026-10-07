@@ -47,7 +47,13 @@ export const SinglePredictor: React.FC<Props> = ({ examples }) => {
       if (selectedModel === "browser_rdkit") {
         data = await predictInBrowser(targetSmiles.trim());
       } else {
-        data = await predictMolecule(targetSmiles.trim(), selectedModel);
+        try {
+          data = await predictMolecule(targetSmiles.trim(), selectedModel);
+        } catch (serverErr) {
+          // If server is unreachable (e.g. GitHub Pages static deployment), evaluate client-side with RDKit.js
+          console.warn("Server unavailable, using in-browser RDKit.js:", serverErr);
+          data = await predictInBrowser(targetSmiles.trim());
+        }
       }
       setResult(data);
       setActiveSvg(data.svg);

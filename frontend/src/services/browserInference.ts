@@ -31,9 +31,11 @@ export async function initBrowserRDKit(): Promise<any> {
   wasmLoadPromise = new Promise(async (resolve, reject) => {
     try {
       isLoadingWasm = true;
+      const base = (import.meta.env.BASE_URL || "/").replace(/\/$/, "");
+
       // Fetch model weights first
       if (!modelWeights) {
-        const res = await fetch("/model_weights.json");
+        const res = await fetch(`${base}/model_weights.json`);
         modelWeights = await res.json();
       }
 
@@ -43,15 +45,15 @@ export async function initBrowserRDKit(): Promise<any> {
         // Load RDKit script dynamically if not present
         await new Promise<void>((resScript, rejScript) => {
           const script = document.createElement("script");
-          script.src = "/RDKit_minimal.js";
+          script.src = `${base}/RDKit_minimal.js`;
           script.onload = () => resScript();
-          script.onerror = () => rejScript(new Error("Failed to load /RDKit_minimal.js"));
+          script.onerror = () => rejScript(new Error("Failed to load RDKit_minimal.js"));
           document.head.appendChild(script);
         });
       }
 
       const RDKit = await (window as any).initRDKitModule({
-        locateFile: () => "/RDKit_minimal.wasm",
+        locateFile: () => `${base}/RDKit_minimal.wasm`,
       });
       rdkitInstance = RDKit;
       isLoadingWasm = false;
